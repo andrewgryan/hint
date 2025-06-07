@@ -28,28 +28,32 @@ let origin = van.state("lhr");
 let destination = van.state("cdg");
 
 van.add(document.body, [
-	h1(origin, " -> ", destination),
-	Airport("origin", origin),
-	Airport("destination", destination),
-	h2("Depart"),
-	label({ for: "dep-date" }, "Date"),
-	input({
-		type: "date",
-		name: "dep-date",
-		id: "dep-date",
-		value: state.d.val,
-		onchange: (ev) => {
-			state.d.val = ev.target.value;
-		},
-	}),
-	label({ for: "dep-time" }, "Time"),
-	input({
-		type: "time",
-		name: "dep-time",
-		id: "dep-time",
-		value: state.t.val,
-		onchange: (ev) => {
-			state.t.val = ev.target.value;
-		},
-	}),
+	div({ id: "map" }),
+	div(
+		{ id: "control" },
+		h1(origin, " -> ", destination),
+		Airport("origin", origin),
+		Airport("destination", destination),
+		h2("Depart"),
+		label({ for: "dep-date" }, "Date"),
+		input({
+			type: "date",
+			name: "dep-date",
+			id: "dep-date",
+			value: state.d.val,
+			onchange: (ev) => {
+				state.d.val = ev.target.value;
+			},
+		}),
+		label({ for: "dep-time" }, "Time"),
+		input({
+			type: "time",
+			name: "dep-time",
+			id: "dep-time",
+			value: state.t.val,
+			onchange: (ev) => {
+				state.t.val = ev.target.value;
+			},
+		})
+	),
 ]);
