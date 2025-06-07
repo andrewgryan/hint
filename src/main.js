@@ -1,3 +1,12 @@
+import L, {
+	Map,
+	TileLayer,
+	Marker,
+	Circle,
+	Polygon,
+	Popup,
+} from "./leaflet.js";
+
 import van from "./van.js";
 let { label, h2, h1, select, option, input, div } = van.tags;
 let state = { d: van.state("2025-06-06"), t: van.state("00:00") };
@@ -27,8 +36,17 @@ let Airport = (name, place) => {
 let origin = van.state("lhr");
 let destination = van.state("cdg");
 
+const el = div({ id: "map" });
+const map = new Map(el).setView([51.505, -15], 1);
+
+const tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+	maxZoom: 19,
+	attribution:
+		'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+
 van.add(document.body, [
-	div({ id: "map" }),
+	el,
 	div(
 		{ id: "control" },
 		h1(origin, " -> ", destination),
