@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1"
+		/>
+		<script type="text/javascript" src="/src/van.js"></script>
+		<link rel="stylesheet" href="/static/style.css" media="all" />
+		<title></title>
+	</head>
+	<body>
+		<h1>Hello, World!</h1>
+		<div class="col-2">
+			<select id="origin" name="origin">
+				<option value="lhr">London Heathrow</option>
+				<option value="cdg">Paris (CDG)</option>
+			</select>
+			<select id="destination" name="destination">
+				<option value="lhr">London Heathrow</option>
+				<option value="cdg">Paris (CDG)</option>
+			</select>
+			<input id="depart-date" type="date" name="" />
+			<input id="depart-time" type="time" name="" />
+			<input id="arrive-date" type="date" name="" />
+			<input id="arrive-time" type="time" name="" />
+		</div>
+		<script type="module">
+			let depart = {
+				date: "2025-06-06",
+				time: "18:11",
+			};
+			document.getElementById("depart-date").addEventListener(
+				"change",
+				(ev) => {
+					depart.date = ev.target.value;
+					alert(JSON.stringify(depart));
+				}
+			);
+			import van from "./src/van.js";
+			let { h2, input, div } = van.tags;
+			let state = { d: van.state("Van"), t: van.state("") };
+
+			let stamp = van.derive(
+				() => state.d.val + "T" + state.t.val
+			);
+			van.add(
+				document.body,
+				div(
+					h2("Hello, ", stamp, "!"),
+					input({
+						type: "date",
+						name: "dep-date",
+						id: "dep-date",
+						onchange: (ev) => {
+							state.d.val =
+								ev.target.value;
+						},
+					}),
+					input({
+						type: "time",
+						name: "dep-time",
+						id: "dep-time",
+						onchange: (ev) => {
+							state.t.val =
+								ev.target.value;
+						},
+					})
+				)
+			);
+		</script>
+	</body>
+</html>
