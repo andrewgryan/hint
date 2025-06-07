@@ -1,56 +1,55 @@
 import van from "./van.js";
-let { h2, h1, select, option, input, div } = van.tags;
-let state = { d: van.state("Van"), t: van.state("") };
+let { label, h2, h1, select, option, input, div } = van.tags;
+let state = { d: van.state("2025-06-06"), t: van.state("00:00") };
 
 let stamp = van.derive(() => state.d.val + "T" + state.t.val);
 
-/**
-<h1>Hello, World!</h1>
-<div class="col-2">
-	<select id="origin" name="origin">
-		<option value="lhr">London Heathrow</option>
-		<option value="cdg">Paris (CDG)</option>
-	</select>
-	<select id="destination" name="destination">
-		<option value="lhr">London Heathrow</option>
-		<option value="cdg">Paris (CDG)</option>
-	</select>
-	<input id="depart-date" type="date" name="" />
-	<input id="depart-time" type="time" name="" />
-	<input id="arrive-date" type="date" name="" />
-	<input id="arrive-time" type="time" name="" />
-</div>
-*/
-
-let Airport = (name) => {
+let Airport = (name, place) => {
 	return select(
-		{ id: name, name },
-		option({ value: "lhr" }, "London Heathrow"),
-		option({ value: "cdg" }, "Paris (CDG)")
+		{
+			id: name,
+			name,
+			onchange: (ev) => {
+				place.val = ev.target.value;
+			},
+		},
+		option(
+			{ value: "lhr", selected: place.val == "lhr" },
+			"London Heathrow"
+		),
+		option(
+			{ value: "cdg", selected: place.val == "cdg" },
+			"Paris (CDG)"
+		)
 	);
 };
 
+let origin = van.state("lhr");
+let destination = van.state("cdg");
+
 van.add(document.body, [
-	h1("Hello, ", stamp, "!"),
-	div(
-		{ class: "col-2" },
-		Airport("origin"),
-		Airport("destination"),
-		input({
-			type: "date",
-			name: "dep-date",
-			id: "dep-date",
-			onchange: (ev) => {
-				state.d.val = ev.target.value;
-			},
-		}),
-		input({
-			type: "time",
-			name: "dep-time",
-			id: "dep-time",
-			onchange: (ev) => {
-				state.t.val = ev.target.value;
-			},
-		})
-	),
+	h1(origin, " -> ", destination),
+	Airport("origin", origin),
+	Airport("destination", destination),
+	h2("Depart"),
+	label({ for: "dep-date" }, "Date"),
+	input({
+		type: "date",
+		name: "dep-date",
+		id: "dep-date",
+		value: state.d.val,
+		onchange: (ev) => {
+			state.d.val = ev.target.value;
+		},
+	}),
+	label({ for: "dep-time" }, "Time"),
+	input({
+		type: "time",
+		name: "dep-time",
+		id: "dep-time",
+		value: state.t.val,
+		onchange: (ev) => {
+			state.t.val = ev.target.value;
+		},
+	}),
 ]);
