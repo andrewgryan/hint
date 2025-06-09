@@ -1,7 +1,3 @@
-
-
-
-
 #!/usr/bin/env python
 
 # Inspired by https://gist.github.com/jtangelder/e445e9a7f5e31c220be6
@@ -29,5 +25,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         return http.server.SimpleHTTPRequestHandler.do_GET(self)
 
 
-httpd = socketserver.TCPServer(HOST, Handler)
-httpd.serve_forever()
+with socketserver.TCPServer(HOST, Handler) as httpd:
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        httpd.shutdown()
