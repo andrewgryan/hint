@@ -1,4 +1,7 @@
+import Index from "./Index.js";
 import New from "./New.js";
+import Route from "./Route.js";
+import RouteList from "./RouteList.js";
 import L, {
     Map,
     TileLayer,
@@ -106,10 +109,18 @@ const Page = () => {
 
 const App = () => {
     let route = window.location.pathname;
+    let patternNew = /new\/(\d+)/;
+    let patternRoute = /route\/(\d+)/;
     if (route === "/") {
-        return a({ href: "/new" }, "Foo");
-    } else if (route === "/new") {
-        return New();
+        return Index();
+    } else if (route === "/route") {
+        return RouteList();
+    } else if (route.match(patternNew)) {
+        let step = route.match(patternNew)[1];
+        return New(step);
+    } else if (route.match(patternRoute)) {
+        let id = route.match(patternRoute)[1];
+        return Route(id);
     }
     return div("path: ", window.location.pathname);
 };

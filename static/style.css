@@ -1,16 +1,37 @@
+@import "./gray.min.css";
+@import "./sizes.min.css";
+
 body {
-	font-family: system-ui;
-	display: grid;
-	height: 100vh;
-	grid-template-rows: 1fr 2fr;
-	margin: 0;
+    background-color: var(--gray-11);
+    color: var(--gray-6);
+    font-family: system-ui;
+    height: 100vh;
+    margin: 0;
+}
+
+button {
+    background-color: var(--gray-9);
+    border: none;
+    color: inherit;
+    font: inherit;
+}
+
+main {
+    margin-inline: var(--size-4);
 }
 
 #control {
-	margin: 0.25rem;
+    margin: 0.25rem;
 }
 
 .col-2 {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.index {
+    height: 90vh;
+    display: grid;
+	gap: var(--size-2);
+    grid-template-rows: auto 1fr 1fr;
 }
