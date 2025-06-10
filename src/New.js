@@ -14,6 +14,11 @@ let {
 } = van.tags;
 
 export default function New() {
+    let airports = [
+        { id: "lhr", name: "London Heathrow" },
+        { id: "cdg", name: "Paris CDG" },
+        { id: "jfk", name: "New York JFK" },
+    ];
     return main(
         { class: "New" },
         h1("New route"),
@@ -22,52 +27,78 @@ export default function New() {
             div(
                 label("Airport"),
                 select(
-                    { selected: "lhr" },
-                    option(
-                        { value: "lhr" },
-                        "London Heathrow"
-                    ),
-                    option(
-                        { value: "cdg" },
-                        "Paris CDG"
-                    ),
-                    option(
-                        { value: "jfk" },
-                        "New York"
+                    {},
+                    airports.map((airport) =>
+                        option(
+                            {
+                                value: airport.id,
+                                selected:
+                                    airport.id ===
+                                    "jfk",
+                            },
+                            airport.name
+                        )
                     )
                 )
             ),
             div(
                 label("Date"),
-                input({ type: "date" })
+                input({
+                    type: "date",
+                    value: new Date()
+                        .toISOString()
+                        .split("T")[0],
+                })
             ),
-            div(label("Time"), input({ type: "time" }))
+            div(
+                label("Time"),
+                input({
+                    type: "time",
+                    value: new Date()
+                        .toISOString()
+                        .split("T")[1]
+                        .split(".")[0],
+                })
+            )
         ),
         section(
             header(h2("Arrive")),
             div(
                 label("Airport"),
                 select(
-                    { selected: "cdg" },
-                    option(
-                        { value: "lhr" },
-                        "London Heathrow"
-                    ),
-                    option(
-                        { value: "cdg" },
-                        "Paris CDG"
-                    ),
-                    option(
-                        { value: "jfk" },
-                        "New York"
+                    {},
+                    airports.map((airport) =>
+                        option(
+                            {
+                                value: airport.id,
+                                selected:
+                                    airport.id ===
+                                    "cdg",
+                            },
+                            airport.name
+                        )
                     )
                 )
             ),
             div(
                 label("Date"),
-                input({ type: "date" })
+                input({
+                    type: "date",
+                    value: new Date()
+                        .toISOString()
+                        .split("T")[0],
+                })
             ),
-            div(label("Time"), input({ type: "time" }))
+            div(
+                label("Time"),
+                input({
+                    type: "time",
+                    value: new Date()
+                        .toISOString()
+                        .split("T")[1]
+                        .split(".")[0],
+                })
+            )
         ),
         section(
             header(h2("Details")),

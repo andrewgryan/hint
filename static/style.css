@@ -15,6 +15,12 @@
     * {
         margin: 0;
     }
+
+    :root {
+        --bg: var(--gray-12);
+        --surface: var(--gray-10);
+        --border: var(--gray-8);
+    }
 }
 
 @layer page {
@@ -22,20 +28,27 @@
         margin-block: var(--size-5);
         display: grid;
         gap: var(--size-3);
+        h1 {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg);
+            padding-block: var(--size-2);
+        }
         section {
             display: grid;
             gap: var(--size-3);
             color: var(--gray-1);
-            background-color: var(--gray-10);
+            background-color: var(--surface);
             border: var(--border-size-1) solid
-                var(--gray-9);
+                var(--border);
             border-radius: var(--radius-1);
             padding: var(--size-2);
-            padding-block: var(--size-5);
+            padding-block: var(--size-3);
         }
         label {
             display: block;
-            color: var(--gray-3);
+            color: var(--gray-5);
+            margin-block-end: var(--size-1);
         }
         input,
         select {
@@ -44,14 +57,26 @@
             font: inherit;
             width: 100%;
         }
-        button {
+        button,
+        select,
+        input {
             padding-block: var(--size-2);
+            padding-inline: var(--size-1);
+        }
+
+        input, select {
+            border: var(--border-size-1) solid
+                var(--border);
         }
     }
 }
 
+h1 {
+    color: var(--lime-6);
+}
+
 body {
-    background-color: var(--gray-11);
+    background-color: var(--bg);
     color: var(--gray-6);
     font-family: system-ui;
     min-height: 100vh;
@@ -66,7 +91,7 @@ button {
 }
 
 main {
-    margin-inline: var(--size-4);
+    margin-inline: var(--size-2);
 }
 
 #control {
