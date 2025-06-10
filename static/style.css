@@ -27,7 +27,7 @@
     .New {
         margin-block: var(--size-5);
         display: grid;
-        gap: var(--size-3);
+        gap: var(--size-8);
         h1 {
             position: sticky;
             top: 0;
@@ -36,14 +36,8 @@
         }
         section {
             display: grid;
-            gap: var(--size-3);
+            gap: var(--size-2);
             color: var(--gray-1);
-            background-color: var(--surface);
-            border: var(--border-size-1) solid
-                var(--border);
-            border-radius: var(--radius-1);
-            padding: var(--size-2);
-            padding-block: var(--size-3);
         }
         label {
             display: block;
@@ -64,7 +58,9 @@
             padding-inline: var(--size-1);
         }
 
-        input, select {
+        input,
+        select {
+            background-color: var(--surface);
             border: var(--border-size-1) solid
                 var(--border);
         }
@@ -98,9 +94,14 @@ main {
     margin: 0.25rem;
 }
 
-.col-2 {
+.grid {
     display: grid;
+}
+.col-2 {
     grid-template-columns: 1fr 1fr;
+}
+.gap-2 {
+    gap: var(--size-2);
 }
 
 .index {

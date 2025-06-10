@@ -42,23 +42,26 @@ export default function New() {
                 )
             ),
             div(
-                label("Date"),
-                input({
-                    type: "date",
-                    value: new Date()
-                        .toISOString()
-                        .split("T")[0],
-                })
-            ),
-            div(
-                label("Time"),
-                input({
-                    type: "time",
-                    value: new Date()
-                        .toISOString()
-                        .split("T")[1]
-                        .split(".")[0],
-                })
+                { class: "grid col-2 gap-2" },
+                div(
+                    label("Date"),
+                    input({
+                        type: "date",
+                        value: new Date()
+                            .toISOString()
+                            .split("T")[0],
+                    })
+                ),
+                div(
+                    label("Time"),
+                    input({
+                        type: "time",
+                        value: new Date()
+                            .toISOString()
+                            .split("T")[1]
+                            .split(".")[0],
+                    })
+                )
             )
         ),
         section(
@@ -81,23 +84,26 @@ export default function New() {
                 )
             ),
             div(
-                label("Date"),
-                input({
-                    type: "date",
-                    value: new Date()
-                        .toISOString()
-                        .split("T")[0],
-                })
-            ),
-            div(
-                label("Time"),
-                input({
-                    type: "time",
-                    value: new Date()
-                        .toISOString()
-                        .split("T")[1]
-                        .split(".")[0],
-                })
+                { class: "grid col-2 gap-2" },
+                div(
+                    label("Date"),
+                    input({
+                        type: "date",
+                        value: new Date()
+                            .toISOString()
+                            .split("T")[0],
+                    })
+                ),
+                div(
+                    label("Time"),
+                    input({
+                        type: "time",
+                        value: new Date()
+                            .toISOString()
+                            .split("T")[1]
+                            .split(".")[0],
+                    })
+                )
             )
         ),
         section(
