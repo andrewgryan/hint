@@ -1,11 +1,60 @@
 @import "./gray.min.css";
+@import "./lime.min.css";
 @import "./sizes.min.css";
+@import "./borders.min.css";
+
+@layer global, page, component;
+
+@layer global {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    * {
+        margin: 0;
+    }
+}
+
+@layer page {
+    .New {
+        margin-block: var(--size-5);
+        display: grid;
+        gap: var(--size-3);
+        section {
+            display: grid;
+            gap: var(--size-3);
+            color: var(--gray-1);
+            background-color: var(--gray-10);
+            border: var(--border-size-1) solid
+                var(--gray-9);
+            border-radius: var(--radius-1);
+            padding: var(--size-2);
+            padding-block: var(--size-5);
+        }
+        label {
+            display: block;
+            color: var(--gray-3);
+        }
+        input,
+        select {
+            background-color: inherit;
+            color: inherit;
+            font: inherit;
+            width: 100%;
+        }
+        button {
+            padding-block: var(--size-2);
+        }
+    }
+}
 
 body {
     background-color: var(--gray-11);
     color: var(--gray-6);
     font-family: system-ui;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -32,6 +81,6 @@ main {
 .index {
     height: 90vh;
     display: grid;
-	gap: var(--size-2);
+    gap: var(--size-2);
     grid-template-rows: auto 1fr 1fr;
 }

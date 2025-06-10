@@ -109,15 +109,13 @@ const Page = () => {
 
 const App = () => {
     let route = window.location.pathname;
-    let patternNew = /new\/(\d+)/;
     let patternRoute = /route\/(\d+)/;
     if (route === "/") {
         return Index();
     } else if (route === "/route") {
         return RouteList();
-    } else if (route.match(patternNew)) {
-        let step = route.match(patternNew)[1];
-        return New(step);
+    } else if (route.startsWith("/new")) {
+        return New();
     } else if (route.match(patternRoute)) {
         let id = route.match(patternRoute)[1];
         return Route(id);
