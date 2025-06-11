@@ -114,9 +114,22 @@ export default function New() {
             ),
             div(
                 label("Number of points"),
-                input({ type: "number", value: 150 })
+                input({
+                    type: "number",
+                    value: 150,
+                    min: 2,
+                    max: 200,
+                    step: 1,
+                })
             )
         ),
-        button({}, "Submit")
+        button(
+            {
+                onclick: () => {
+                    window.location.href = "/route/0";
+                },
+            },
+            "Submit"
+        )
     );
 }
