@@ -7,7 +7,8 @@ import L, {
     Popup,
 } from "./leaflet.js";
 import van from "./van.js";
-let { div, h1, table, tr, th, td, main } = van.tags;
+let { button, div, h1, table, tr, th, td, main } =
+    van.tags;
 
 const Table = (values) => {
     let lats = values;
@@ -73,6 +74,18 @@ const MapElement = () => {
     return el;
 };
 
+const Fab = () => {
+    return button(
+        {
+            class: "Fab",
+            onclick: () => {
+                window.location.href = "/";
+            },
+        },
+        "<"
+    );
+};
+
 export default function Route(id) {
     let values = [];
     for (let i = 0; i < 200; i++) {
@@ -80,8 +93,9 @@ export default function Route(id) {
     }
     return main(
         { class: "Route" },
-        h1("Route ", id, "!"),
+        Fab(),
         MapElement(),
+        h1("Route ", id),
         div(
             {
                 class: "block w-full overflow-x-scroll",

@@ -2,11 +2,31 @@
 @import "./lime.min.css";
 @import "./sizes.min.css";
 @import "./borders.min.css";
+@import "./fonts.min.css";
 
 @layer global, page, component;
 
 @layer component {
+    .Fab {
+        z-index: 5;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-block-start: var(--size-4);
+        margin-inline-end: var(--size-4);
+        inline-size: var(--size-8);
+        aspect-ratio: 1;
+        border-radius: var(--radius-round);
+        background-color: var(--submit);
+        color: var(--bg);
+        font-size: var(--font-size-4);
+        font-weight: var(--font-weight-5);
+    }
+}
+
+@layer component {
     .leaflet-container {
+        isolation: isolate;
         background-color: var(--bg) !important;
     }
     .leaflet-control-zoom,
@@ -39,6 +59,10 @@
 @layer page {
     .Route {
         margin-inline: 0;
+
+        h1 {
+            margin: var(--size-2);
+        }
 
         table {
             border-spacing: 0;
