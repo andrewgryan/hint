@@ -12,13 +12,27 @@ let {
     section,
     select,
 } = van.tags;
+import { AIRPORTS } from "./airports.js";
 
 export default function New() {
-    let airports = [
-        { id: "lhr", name: "London Heathrow" },
-        { id: "cdg", name: "Paris CDG" },
-        { id: "jfk", name: "New York JFK" },
-    ];
+    let airports = AIRPORTS;
+    let date = new Date().toISOString().split("T")[0];
+    let time = new Date()
+        .toISOString()
+        .split("T")[1]
+        .split(".")[0];
+    let route = {
+        departure: {
+            airportId: van.state("jfk"),
+            date: van.state(date),
+            time: van.state(time),
+        },
+        arrival: {
+            airportId: van.state("jfk"),
+            date: van.state(date),
+            time: van.state(time),
+        },
+    };
     return main(
         { class: "New" },
         h1("New route"),
@@ -27,14 +41,20 @@ export default function New() {
             div(
                 label("Airport"),
                 select(
-                    {},
+                    {
+                        onchange: (ev) => {
+                            route.departure.airportId.val =
+                                ev.target.value;
+                        },
+                    },
                     airports.map((airport) =>
                         option(
                             {
                                 value: airport.id,
                                 selected:
                                     airport.id ===
-                                    "jfk",
+                                    route.departure
+                                        .airportId.val,
                             },
                             airport.name
                         )
@@ -47,19 +67,23 @@ export default function New() {
                     label("Date"),
                     input({
                         type: "date",
-                        value: new Date()
-                            .toISOString()
-                            .split("T")[0],
+                        value: route.departure.date,
+                        onchange: (ev) => {
+                            route.departure.date.val =
+                                ev.target.value;
+                        },
                     })
                 ),
                 div(
                     label("Time"),
                     input({
                         type: "time",
-                        value: new Date()
-                            .toISOString()
-                            .split("T")[1]
-                            .split(".")[0],
+                        value: route.departure.time
+                            .val,
+                        onchange: (ev) => {
+                            route.departure.time.val =
+                                ev.target.value;
+                        },
                     })
                 )
             )
@@ -69,14 +93,20 @@ export default function New() {
             div(
                 label("Airport"),
                 select(
-                    {},
+                    {
+                        onchange: (ev) => {
+                            route.arrival.airportId.val =
+                                ev.target.value;
+                        },
+                    },
                     airports.map((airport) =>
                         option(
                             {
                                 value: airport.id,
                                 selected:
                                     airport.id ===
-                                    "cdg",
+                                    route.arrival
+                                        .airportId.val,
                             },
                             airport.name
                         )
@@ -89,19 +119,22 @@ export default function New() {
                     label("Date"),
                     input({
                         type: "date",
-                        value: new Date()
-                            .toISOString()
-                            .split("T")[0],
+                        value: route.arrival.date,
+                        onchange: (ev) => {
+                            route.arrival.date.val =
+                                ev.target.value;
+                        },
                     })
                 ),
                 div(
                     label("Time"),
                     input({
                         type: "time",
-                        value: new Date()
-                            .toISOString()
-                            .split("T")[1]
-                            .split(".")[0],
+                        value: route.arrival.time.val,
+                        onchange: (ev) => {
+                            route.arrival.time.val =
+                                ev.target.value;
+                        },
                     })
                 )
             )
@@ -129,7 +162,7 @@ export default function New() {
                     window.location.href = "/route/0";
                 },
             },
-            "Submit"
+            "Create route"
         )
     );
 }
