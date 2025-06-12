@@ -9,11 +9,6 @@
 @layer component {
     .Fab {
         z-index: 5;
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin-block-start: var(--size-4);
-        margin-inline-end: var(--size-4);
         inline-size: var(--size-8);
         aspect-ratio: 1;
         border-radius: var(--radius-round);
@@ -21,6 +16,19 @@
         color: var(--bg);
         font-size: var(--font-size-4);
         font-weight: var(--font-weight-5);
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-block-start: var(--size-4);
+        margin-inline-end: var(--size-4);
+    }
+
+    .Fab--bottom-center {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%);
+        margin-block-end: var(--size-4);
     }
 }
 

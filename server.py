@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env -S uv run --script
 
 # Inspired by https://gist.github.com/jtangelder/e445e9a7f5e31c220be6
 # Python3 http.server for Single Page Application

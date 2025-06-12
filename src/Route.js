@@ -6,6 +6,10 @@ import L, {
     Polygon,
     Popup,
 } from "./leaflet.js";
+import {
+    ALIDADE_SMOOTH_DARK_URL,
+    ALIDADE_SMOOTH_DARK_SETTINGS,
+} from "./Providers.js";
 import van from "./van.js";
 let { button, div, h1, table, tr, th, td, main } =
     van.tags;
@@ -63,13 +67,8 @@ const MapElement = () => {
     const map = new Map(el).setView([51.505, -15], 1);
 
     const tiles = new TileLayer(
-        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}",
-        {
-            minZoom: 0,
-            maxZoom: 20,
-            attribution: "",
-            ext: "png",
-        }
+        ALIDADE_SMOOTH_DARK_URL,
+        ALIDADE_SMOOTH_DARK_SETTINGS
     ).addTo(map);
     return el;
 };
