@@ -34,7 +34,7 @@ const toJSON = (route) => {
         flightLevel: route.flightLevel.val,
         points: route.points.val,
         id: route.id,
-	response: route.response
+        response: route.response,
     };
 };
 
@@ -97,7 +97,6 @@ export default function New() {
         id: null,
         response: null,
     };
-    alert(JSON.stringify(toJSON(route)));
     return main(
         { class: "New" },
         h1("New route"),
@@ -235,6 +234,9 @@ export default function New() {
         button(
             {
                 onclick: () => {
+                    alert(
+                        JSON.stringify(toJSON(route))
+                    );
                     window.location.href = "/route/0";
                 },
             },
