@@ -32,6 +32,8 @@ export default function New() {
             date: van.state(date),
             time: van.state(time),
         },
+        flightLevel: van.state(1000),
+        points: van.state(2),
     };
     return main(
         { class: "New" },
@@ -143,16 +145,27 @@ export default function New() {
             header(h2("Details")),
             div(
                 label("Flight level"),
-                input({ type: "number", value: 150 })
+                input({
+                    type: "number",
+                    value: route.flightLevel.val,
+                    onchange: (ev) => {
+                        route.flightLevel.val =
+                            ev.target.value;
+                    },
+                })
             ),
             div(
                 label("Number of points"),
                 input({
                     type: "number",
-                    value: 150,
+                    value: route.points.val,
                     min: 2,
                     max: 200,
                     step: 1,
+                    onchange: (ev) => {
+                        route.points.val =
+                            ev.target.value;
+                    },
                 })
             )
         ),
