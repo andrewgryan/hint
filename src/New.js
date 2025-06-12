@@ -14,6 +14,66 @@ let {
 } = van.tags;
 import { AIRPORTS } from "./airports.js";
 
+const setResponse = (route) => (response) => {
+    route.response = response;
+    return route;
+};
+
+const toJSON = (route) => {
+    return {
+        departure: {
+            airportId: route.departure.airportId.val,
+            date: route.departure.date.val,
+            time: route.departure.time.val,
+        },
+        arrival: {
+            airportId: route.arrival.airportId.val,
+            date: route.arrival.date.val,
+            time: route.arrival.time.val,
+        },
+        flightLevel: route.flightLevel.val,
+        points: route.points.val,
+        id: route.id,
+	response: route.response
+    };
+};
+
+const setRouteId = (route) => {
+    let routes = localStorage.getItem("routes");
+    if (routes === null) {
+        route.id = 0;
+    } else {
+        let ids = JSON.parse(routes)
+            .filter((r) => r.id !== null)
+            .map((r) => r.id);
+        if (ids.length === 0) {
+            route.id = 0;
+        } else {
+            route.id = Math.max(...ids) + 1;
+        }
+    }
+    return route;
+};
+
+const storeRoute = (route) => {
+    let routes = [];
+    let value = localStorage.getItem("routes");
+    if (value !== null) {
+        routes = JSON.parse(value);
+    }
+    routes.push(route);
+    localStorage.setItem(
+        "routes",
+        JSON.stringify(routes)
+    );
+    return route;
+};
+
+const redirectToRoute = (route) => {
+    window.location.href = `/route/${route.id}`;
+    return route;
+};
+
 export default function New() {
     let airports = AIRPORTS;
     let date = new Date().toISOString().split("T")[0];
@@ -34,7 +94,10 @@ export default function New() {
         },
         flightLevel: van.state(1000),
         points: van.state(2),
+        id: null,
+        response: null,
     };
+    alert(JSON.stringify(toJSON(route)));
     return main(
         { class: "New" },
         h1("New route"),
