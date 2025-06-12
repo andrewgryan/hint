@@ -234,10 +234,15 @@ export default function New() {
         button(
             {
                 onclick: () => {
-                    alert(
-                        JSON.stringify(toJSON(route))
-                    );
-                    window.location.href = "/route/0";
+                    let savedRoute = toJSON(route);
+                    fetch("/static/api.json")
+                        .then((response) =>
+                            response.json()
+                        )
+                        .then(setResponse(savedRoute))
+                        .then(setRouteId)
+                        .then(storeRoute)
+                        .then(redirectToRoute);
                 },
             },
             "Create route"
