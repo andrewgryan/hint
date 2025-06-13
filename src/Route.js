@@ -1,10 +1,8 @@
+import { GreatCircle } from "./vendor/arc.js";
 import L, {
     Map,
     TileLayer,
-    Marker,
-    Circle,
-    Polygon,
-    Popup,
+    Polyline,
 } from "./leaflet.js";
 import {
     ALIDADE_SMOOTH_DARK_URL,
@@ -64,12 +62,28 @@ const Table = (values) => {
 
 const MapElement = () => {
     const el = div({ class: "h-40", id: "map" });
-    const map = new Map(el).setView([51.505, -15], 1);
+    const map = new Map(el); // .setView([51.505, -15], 10);
 
     const tiles = new TileLayer(
         ALIDADE_SMOOTH_DARK_URL,
         ALIDADE_SMOOTH_DARK_SETTINGS
     ).addTo(map);
+
+    // Route
+    let start = { x: 53, y: 0 };
+    let end = { x: 45, y: 45 };
+    let generator = new GreatCircle(start, end);
+    let line = generator.Arc(5);
+    let xys = line.geometries[0].coords;
+    const polyline = new Polyline(xys, {
+        color: "blue",
+    }).addTo(map);
+    // debug(polyline.getBounds());
+    setTimeout(() => {
+        map.fitBounds(polyline.getBounds());
+        map.invalidateSize();
+    });
+
     return el;
 };
 
@@ -85,7 +99,10 @@ const Fab = () => {
     );
 };
 
+const debug = (obj) => alert(JSON.stringify(obj));
+
 export default function Route(id) {
+    // Find saved Route
     let routes = JSON.parse(
         localStorage.getItem("routes") || "[]"
     );

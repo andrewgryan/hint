@@ -83,12 +83,12 @@ export default function New() {
         .split(".")[0];
     let route = {
         departure: {
-            airportId: van.state("jfk"),
+            airportId: van.state("JFK"),
             date: van.state(date),
             time: van.state(time),
         },
         arrival: {
-            airportId: van.state("jfk"),
+            airportId: van.state("JFK"),
             date: van.state(date),
             time: van.state(time),
         },
@@ -114,9 +114,9 @@ export default function New() {
                     airports.map((airport) =>
                         option(
                             {
-                                value: airport.id,
+                                value: airport.code,
                                 selected:
-                                    airport.id ===
+                                    airport.code ===
                                     route.departure
                                         .airportId.val,
                             },
@@ -166,9 +166,9 @@ export default function New() {
                     airports.map((airport) =>
                         option(
                             {
-                                value: airport.id,
+                                value: airport.code,
                                 selected:
-                                    airport.id ===
+                                    airport.code ===
                                     route.arrival
                                         .airportId.val,
                             },

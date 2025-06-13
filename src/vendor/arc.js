@@ -91,7 +91,7 @@ Arc.prototype.wkt = function() {
  * http://en.wikipedia.org/wiki/Great-circle_distance
  *
  */
-var GreatCircle = function(start,end,properties) {
+export function GreatCircle(start,end,properties) {
     if (!start || start.x === undefined || start.y === undefined) {
         throw new Error("GreatCircle constructor expects two args: start and end objects with x and y properties");
     }
