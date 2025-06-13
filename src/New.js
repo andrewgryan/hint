@@ -22,12 +22,12 @@ const setResponse = (route) => (response) => {
 const toJSON = (route) => {
     return {
         departure: {
-            airportId: route.departure.airportId.val,
+            airport: route.departure.airport.val,
             date: route.departure.date.val,
             time: route.departure.time.val,
         },
         arrival: {
-            airportId: route.arrival.airportId.val,
+            airport: route.arrival.airport.val,
             date: route.arrival.date.val,
             time: route.arrival.time.val,
         },
@@ -74,21 +74,32 @@ const redirectToRoute = (route) => {
     return route;
 };
 
+const findAirport = (code) => {
+    return AIRPORTS.find((a) => a.code === code);
+};
+
 export default function New() {
-    let airports = AIRPORTS;
     let date = new Date().toISOString().split("T")[0];
     let time = new Date()
         .toISOString()
         .split("T")[1]
         .split(".")[0];
+    let codes = {
+        departure: van.state("SFO"),
+        arrival: van.state("LHR"),
+    };
     let route = {
         departure: {
-            airportId: van.state("JFK"),
+            airport: van.derive(() =>
+                findAirport(codes.departure.val)
+            ),
             date: van.state(date),
             time: van.state(time),
         },
         arrival: {
-            airportId: van.state("JFK"),
+            airport: van.derive(() =>
+                findAirport(codes.arrival.val)
+            ),
             date: van.state(date),
             time: van.state(time),
         },
@@ -107,18 +118,18 @@ export default function New() {
                 select(
                     {
                         onchange: (ev) => {
-                            route.departure.airportId.val =
+                            codes.departure.val =
                                 ev.target.value;
                         },
                     },
-                    airports.map((airport) =>
+                    AIRPORTS.map((airport) =>
                         option(
                             {
                                 value: airport.code,
                                 selected:
                                     airport.code ===
-                                    route.departure
-                                        .airportId.val,
+                                    codes.departure
+                                        .val,
                             },
                             airport.name
                         )
@@ -159,18 +170,17 @@ export default function New() {
                 select(
                     {
                         onchange: (ev) => {
-                            route.arrival.airportId.val =
+                            codes.arrival.val =
                                 ev.target.value;
                         },
                     },
-                    airports.map((airport) =>
+                    AIRPORTS.map((airport) =>
                         option(
                             {
                                 value: airport.code,
                                 selected:
                                     airport.code ===
-                                    route.arrival
-                                        .airportId.val,
+                                    codes.arrival.val,
                             },
                             airport.name
                         )
