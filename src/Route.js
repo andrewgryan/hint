@@ -86,6 +86,16 @@ const Fab = () => {
 };
 
 export default function Route(id) {
+    let routes = JSON.parse(
+        localStorage.getItem("routes") || "[]"
+    );
+    let matchedRoutes = routes.filter(
+        (route) => route.id === parseInt(id)
+    );
+    if (matchedRoutes.length === 0) {
+        return div(h1("404 Not found"));
+    }
+    let route = matchedRoutes[0];
     let values = [];
     for (let i = 0; i < 200; i++) {
         values.push(30.0 + i / 50);
@@ -94,7 +104,12 @@ export default function Route(id) {
         { class: "Route" },
         Fab(),
         MapElement(),
-        h1("Route ", id),
+        h1(
+            "Route ",
+            route.departure.airportId,
+            " -> ",
+            route.arrival.airportId
+        ),
         div(
             {
                 class: "block w-full overflow-x-scroll",

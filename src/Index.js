@@ -4,7 +4,7 @@ import {
     ALIDADE_SMOOTH_DARK_SETTINGS,
 } from "./Providers.js";
 import van from "./van.js";
-let { h1, main, div, button } = van.tags;
+let { a, h1, h2, main, div, button } = van.tags;
 
 const Card = () => {
     let el = div({ class: "h-40" });
@@ -17,11 +17,32 @@ const Card = () => {
 };
 
 export default function Index() {
+    let routes = JSON.parse(
+        localStorage.getItem("routes") || "[]"
+    );
+    let cards = routes.map((route) => {
+        return a(
+            { href: `/route/${route.id}` },
+            div(
+                h2(
+                    route.departure.airportId,
+                    " -> ",
+                    route.arrival.airportId
+                )
+            )
+        );
+    });
     return main(
         { class: "Index" },
         h1("Title"),
-        Card(),
-        Card(),
-        Card()
+        div(cards),
+        button(
+            {
+                onclick: () => {
+                    window.location.href = "/new";
+                },
+            },
+            "+"
+        )
     );
 }
