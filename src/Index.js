@@ -52,7 +52,7 @@ export default function Index() {
         div({ class: "RouteList" }, cards),
         button(
             {
-                class: "Fab",
+            class: "Fab fixed bottom-0 center mbe-4",
                 onclick: () => {
                     window.location.href = "/new";
                 },

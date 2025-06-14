@@ -146,7 +146,7 @@ const getCoords = (route) => {
 const Fab = () => {
     return button(
         {
-            class: "Fab",
+            class: "Fab absolute top-0 right-0 mie-4 mbs-4",
             onclick: () => {
                 window.location.href = "/";
             },
