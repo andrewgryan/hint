@@ -71,8 +71,11 @@ const MapElement = (coords) => {
     ).addTo(map);
 
     // Route
+    const color = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--lime-6");
     const polyline = new Polyline(coords, {
-        color: "blue",
+        color,
     }).addTo(map);
     setTimeout(() => {
         map.fitBounds(polyline.getBounds());
@@ -132,7 +135,7 @@ const getCoords = (route) => {
         y: parseFloat(route.arrival.airport.lat),
     };
     let generator = new GreatCircle(start, end);
-    let line = generator.Arc(5);
+    let line = generator.Arc(route.points);
     let latlngs = _createLatLngs(
         line,
         new LatLng(start.y, start.x)
