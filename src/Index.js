@@ -1,21 +1,7 @@
-import L, { Map, TileLayer } from "./leaflet.js";
-import {
-    ALIDADE_SMOOTH_DARK_URL,
-    ALIDADE_SMOOTH_DARK_SETTINGS,
-} from "./Providers.js";
+import RouteMap from "./RouteMap.js";
 import van from "./van.js";
 let { a, h1, h2, header, main, div, button } =
     van.tags;
-
-const LeafletMap = () => {
-    let el = div({ class: "h-40" });
-    let map = new Map(el).setView([51, 0], 1);
-    const tiles = new TileLayer(
-        ALIDADE_SMOOTH_DARK_URL,
-        ALIDADE_SMOOTH_DARK_SETTINGS
-    ).addTo(map);
-    return el;
-};
 
 export default function Index() {
     let routes = JSON.parse(
@@ -42,7 +28,7 @@ export default function Index() {
                         div(route.arrival.time)
                     )
                 ),
-                div(LeafletMap())
+                RouteMap(route)
             )
         );
     });
@@ -52,7 +38,7 @@ export default function Index() {
         div({ class: "RouteList" }, cards),
         button(
             {
-            class: "Fab fixed bottom-0 center mbe-4",
+                class: "Fab fixed bottom-0 center mbe-4",
                 onclick: () => {
                     window.location.href = "/new";
                 },
