@@ -79,7 +79,7 @@ export default function Route(id) {
     }
     let route = matchedRoutes[0];
     let values = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < route.points; i++) {
         values.push(30.0 + i / 50);
     }
     return main(

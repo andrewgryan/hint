@@ -44,6 +44,7 @@
         isolation: isolate;
         background-color: var(--bg) !important;
     }
+    .leaflet-control-attribution,
     .leaflet-control-zoom,
     .leaflet-control-zoom-in,
     .leaflet-control-zoom-out {
