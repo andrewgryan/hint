@@ -75,10 +75,14 @@
 
 @layer page {
     .Route {
+        display: grid;
+        gap: var(--size-4);
         margin-inline: 0;
+        padding-block-end: var(--size-4);
 
         h1 {
             margin: var(--size-2);
+            outline: 1px solid blue;
         }
 
         table {
@@ -225,6 +229,12 @@
     gap: var(--size-2);
 }
 
+.h-20 {
+    height: 20ch;
+}
+.h-30 {
+    height: 30ch;
+}
 .h-40 {
     height: 40ch;
 }

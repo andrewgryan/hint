@@ -1,4 +1,5 @@
-import RouteMap from "./RouteMap.js"
+import "./vendor/plotly-3.0.1.min.js";
+import RouteMap from "./RouteMap.js";
 import van from "./van.js";
 let { button, div, h1, table, tr, th, td, main } =
     van.tags;
@@ -51,7 +52,6 @@ const Table = (values) => {
     );
 };
 
-
 const Fab = () => {
     return button(
         {
@@ -82,6 +82,68 @@ export default function Route(id) {
     for (let i = 0; i < route.points; i++) {
         values.push(30.0 + i / 50);
     }
+    const color = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--lime-6");
+    const gridcolor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--gray-6");
+    setTimeout(() =>
+        Plotly.newPlot(
+            "myDiv",
+            [
+                {
+                    x: [
+                        "2013-10-04 22:23:00",
+                        "2013-10-04 23:23:00",
+                        "2013-10-05 00:23:00",
+                        "2013-10-05 01:23:00",
+                        "2013-10-05 02:23:00",
+                        "2013-10-05 03:23:00",
+                        "2013-10-05 04:23:00",
+                        "2013-10-05 05:23:00",
+                    ],
+                    y: [10, 9, 11, 8, 12, 7, 13, 6],
+                    type: "scatter",
+                    marker: {
+                        color,
+                    },
+                },
+            ],
+            {
+                margin: {
+                    l: 45,
+                    r: 35,
+                    t: 40,
+                    b: 40,
+                    pad: 10,
+                },
+                paper_bgcolor: "transparent",
+                plot_bgcolor: "transparent",
+                xaxis: {
+                    color,
+                    gridcolor,
+                },
+                yaxis: {
+                    color,
+                    gridcolor,
+                    title: {
+                        text: "°C",
+                    },
+                },
+                title: {
+                    font: {
+                        color,
+                    },
+                    text: "Air temperature",
+                },
+            },
+            {
+                staticPlot: true,
+                displayModeBar: false,
+            }
+        )
+    );
     return main(
         { class: "Route" },
         Fab(),
@@ -92,6 +154,7 @@ export default function Route(id) {
             " -> ",
             route.arrival.airport.code
         ),
+        div({ id: "myDiv", class: "h-30" }),
         div(
             {
                 class: "block w-full overflow-x-scroll",

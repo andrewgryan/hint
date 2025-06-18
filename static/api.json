@@ -1,3 +1,53 @@
 {
-    "Hello": "World!"
+    "type": "Coverage",
+    "domain": {
+        "type": "Domain",
+        "domainType": "Trajectory",
+        "axes": {
+            "composite": {
+                "dataType": "tuple",
+                "coordinates": ["t", "z", "y", "x"],
+                "values": [
+                    [
+                        "2025-06-18T00:00:00Z",
+                        1000,
+                        53.1,
+                        0
+                    ],
+                    [
+                        "2025-06-18T00:10:00Z",
+                        1000,
+                        53.2,
+                        -0.1
+                    ],
+                    [
+                        "2025-06-18T00:20:00Z",
+                        1000,
+                        53.3,
+                        -0.1
+                    ]
+                ]
+            }
+        }
+    },
+    "parameters": {
+        "temperature": {},
+        "relative_humidity": {}
+    },
+    "ranges": {
+        "temperature": {
+            "type": "NdArray",
+            "dataType": "float",
+            "axisNames": ["composite"],
+            "shape": [2],
+            "values": [30.0, 31.0]
+        },
+        "relative_humidity": {
+            "type": "NdArray",
+            "dataType": "float",
+            "axisNames": ["composite"],
+            "shape": [2],
+            "values": [75.0, 80.0]
+        }
+    }
 }
